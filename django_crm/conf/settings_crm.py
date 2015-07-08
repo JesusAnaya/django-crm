@@ -6,3 +6,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ANONYMOUS_USER_ID = None
+
+
+DASHBOARD_SCHEMA = {
+    'title': 'Welcome to Django-CRM',
+    'rows': []
+}

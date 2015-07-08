@@ -1,6 +1,5 @@
-from django.views.generics import ViewBase
+from django.views.generics import View
 
 
-class EntityViewBase(ViewBase):
-    def get_special_field_from_model(self):
-        pass
+class (View):
+    pass

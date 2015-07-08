@@ -1,27 +1,28 @@
 from django.conf import settings as django_settings
-from .models import Setting
+from django_crm.conf import settings_crm
 
 
 class SettingsLoader(object):
-    settings_queryset = Setting.objects.all()
+    #settings_queryset = Setting.objects.all()
     loaded_attrs = {}
 
     def __init__(self):
-        self.loadconfig()
+        pass
+        #self.loadconfig()
 
     def __getattr__(self, attribute):
-        try:
-            return self.loaded_attrs[attribute]
-        except KeyError:
-            return django_settings[attribute]
+        attr = getattr(django_settings, attribute)
+        if attr in None:
+            attr = getattr(settings_crm, attribute)
+        return attr
 
-    def loadconfig(self):
-        settings_attrs = {}
+    # def loadconfig(self):
+    #     settings_attrs = {}
 
-        for attribute in self.settings_queryset:
-            settings_attrs[attribute.name] = attribute.value
-        self.loaded_attrs = settings_attrs
+    #     for attribute in self.settings_queryset:
+    #         settings_attrs[attribute.name] = attribute.value
+    #     self.loaded_attrs = settings_attrs
 
 
-#settings = SettingsLoader()
-settings = django_settings
+settings = SettingsLoader()
+#settings = django_settings
